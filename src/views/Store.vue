@@ -198,7 +198,7 @@ display:flex;
 flex-wrap:wrap;
 justify-content:center;
 gap:1rem;
-padding:5rem 1rem 1rem 1rem;
+padding:5rem 1rem;
 max-width:1000px;
 margin:auto;
 }
