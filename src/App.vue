@@ -7,7 +7,7 @@ const route = useRoute();
 
 <template>
   <header>
-      <p>E-shop</p>
+      <h1>E-shop</h1>
       <nav>
         <RouterLink to="/" :class="{ active: route.path === '/' }">Store</RouterLink>
         <RouterLink to="/cart" :class="{ active: route.path === '/cart' }">Cart</RouterLink>
