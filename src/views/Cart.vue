@@ -6,7 +6,10 @@
 <section class="con">
     <div class="con-products">
         <div>
-            <div class="product">
+
+
+            <ul class="product">
+            <li>
                 <button type="button" title="Odebrat položku z košíku">
                   <span class="svg-span">
                   <svg width="400" height="400" viewBox="0 0 400 400" stroke-width="50" stroke-linejoin="round" stroke="black" stroke-linecap="round" fill="none">
@@ -15,10 +18,14 @@
                   </svg>
                   </span>
                 </button>
-                <p>Name produkt Name produkt</p>
-                <p>1x</p>
-                <p>10 &#36;</p>
-            </div>
+            </li>
+                <li>Name produkt Name produkt</li>
+                <li>1x</li>
+                <li>10 &#36;</li>
+            </ul>
+
+
+
         </div>
 
         <div class="con-price">
@@ -58,15 +65,18 @@ border:2px solid black;
 padding:.5rem 1rem;
 margin-bottom:1rem;
 max-width:30rem;
+margin:0;
+padding:0;
+list-style-type:none;
 }
 
-.product p
+.product li
 {
 margin-bottom:0;
 }
 
 
-.product button
+.product li button
 {
 color:black;
 background-color:transparent;
@@ -75,15 +85,6 @@ padding:.5rem;
 border-radius:50%;
 font-size:1rem;
 font-weight:bold;
-}
-
-.product input,.product input:focus
-{
-width:5ch;
-text-align:center;
-border:none;
-font-size:1rem;
-outline:none;
 }
 
 .con-price
