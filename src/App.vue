@@ -1,20 +1,28 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView , useRoute } from 'vue-router'
 // import HelloWorld from './components/HelloWorld.vue'
+
+const route = useRoute();
 </script>
 
 <template>
   <header>
+      <p>E-shop</p>
       <nav>
-        <RouterLink to="/">Store</RouterLink>
-        <RouterLink to="/cart">Cart</RouterLink>
+        <RouterLink to="/" :class="{ active: route.path === '/' }">Store</RouterLink>
+        <RouterLink to="/cart" :class="{ active: route.path === '/cart' }">Cart</RouterLink>
       </nav>
   </header>
 
 <router-view /> <!-- Zde se vykreslí aktuální stránka podle URL -->
 
+
+
 </template>
 
 <style scoped>
-
+.active
+{
+text-decoration:underline;
+}
 </style>
