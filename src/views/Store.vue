@@ -16,167 +16,21 @@
 
 
 
-    <div class="con-product">
-        <p>Name product</p>
-        <img src="../../img.jpg" width="200" height="200" alt="img-produkct">
+    <ul class="con-product">
+        <li>Name product</li>
+        <li><img src="../../img.jpg" width="200" height="200" alt="img-produkct"></li>
         <div class="con-buy">
-            <p>10 &#36;</p>
-            <div class="con-butt">
+            <li>10 &#36;</li>
+            <li class="con-butt">
                 <button type="button" title="buy a product">Buy</button>
-            </div>
-            <div class="con-num-pro" style="display:none;">
+            </li>
+            <li class="con-num-pro" style="display:none;"> <!-- (ZDE BUDE místo toho V-IF) -->
                 <button type="button" title="buy a product"><span class="goUp">-</span></button>
-                <input type="text" value="1" readonly>
+                <p>1</p>
                 <button type="button" title="buy a product"><span class="goUp">+</span></button>
-            </div>
+            </li>
         </div>
-    </div>
-
-
-    <div class="con-product">
-        <p>Name product</p>
-        <img src="../../img.jpg" width="200" height="200" alt="img-produkct">
-        <div class="con-buy">
-            <p>10 &#36;</p>
-            <div class="con-butt" style="display:none;">
-                <button type="button" title="buy a product">Buy</button>
-            </div>
-            <div class="con-num-pro">
-                <button type="button" title="buy a product"><span class="goUp">-</span></button>
-                <input type="text" value="1" readonly>
-                <button type="button" title="buy a product"><span class="goUp">+</span></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="con-product">
-        <p>Name product</p>
-        <img src="../../img.jpg" width="200" height="200" alt="img-produkct">
-        <div class="con-buy">
-            <p>10 &#36;</p>
-            <div class="con-butt">
-                <button type="button" title="buy a product">Buy</button>
-            </div>
-            <div class="con-num-pro" style="display:none;">
-                <button type="button" title="buy a product"><span class="goUp">-</span></button>
-                <input type="text" value="1" readonly>
-                <button type="button" title="buy a product"><span class="goUp">+</span></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="con-product">
-        <p>Name product</p>
-        <img src="../../img.jpg" width="200" height="200" alt="img-produkct">
-        <div class="con-buy">
-            <p>10 &#36;</p>
-            <div class="con-butt">
-                <button type="button" title="buy a product">Buy</button>
-            </div>
-            <div class="con-num-pro" style="display:none;">
-                <button type="button" title="buy a product"><span class="goUp">-</span></button>
-                <input type="text" value="1" readonly>
-                <button type="button" title="buy a product"><span class="goUp">+</span></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="con-product">
-        <p>Name product</p>
-        <img src="../../img.jpg" width="200" height="200" alt="img-produkct">
-        <div class="con-buy">
-            <p>10 &#36;</p>
-            <div class="con-butt">
-                <button type="button" title="buy a product">Buy</button>
-            </div>
-            <div class="con-num-pro" style="display:none;">
-                <button type="button" title="buy a product"><span class="goUp">-</span></button>
-                <input type="text" value="1" readonly>
-                <button type="button" title="buy a product"><span class="goUp">+</span></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="con-product">
-        <p>Name product</p>
-        <img src="../../img.jpg" width="200" height="200" alt="img-produkct">
-        <div class="con-buy">
-            <p>10 &#36;</p>
-            <div class="con-butt">
-                <button type="button" title="buy a product">Buy</button>
-            </div>
-            <div class="con-num-pro" style="display:none;">
-                <button type="button" title="buy a product"><span class="goUp">-</span></button>
-                <input type="text" value="1" readonly>
-                <button type="button" title="buy a product"><span class="goUp">+</span></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="con-product">
-        <p>Name product</p>
-        <img src="../../img.jpg" width="200" height="200" alt="img-produkct">
-        <div class="con-buy">
-            <p>10 &#36;</p>
-            <div class="con-butt">
-                <button type="button" title="buy a product">Buy</button>
-            </div>
-            <div class="con-num-pro" style="display:none;">
-                <button type="button" title="buy a product"><span class="goUp">-</span></button>
-                <input type="text" value="1" readonly>
-                <button type="button" title="buy a product"><span class="goUp">+</span></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="con-product">
-        <p>Name product</p>
-        <img src="../../public/img.jpg" width="200" height="200" alt="img-produkct">
-        <div class="con-buy">
-            <p>10 &#36;</p>
-            <div class="con-butt">
-                <button type="button" title="buy a product">Buy</button>
-            </div>
-            <div class="con-num-pro" style="display:none;">
-                <button type="button" title="buy a product">-</button>
-                <input type="text" value="1" readonly>
-                <button type="button" title="buy a product"><span class="goUp">+</span></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="con-product">
-        <p>Name product</p>
-        <img src="../../img.jpg" width="200" height="200" alt="img-produkct">
-        <div class="con-buy">
-            <p>10 &#36;</p>
-            <div class="con-butt">
-                <button type="button" title="buy a product">Buy</button>
-            </div>
-            <div class="con-num-pro" style="display:none;">
-                <button type="button" title="buy a product">-</button>
-                <input type="text" value="1" readonly>
-                <button type="button" title="buy a product"><span class="goUp">+</span></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="con-product">
-        <p>Name product</p>
-        <img src="../../img.jpg" width="200" height="200" alt="img-produkct">
-        <div class="con-buy">
-            <p>10 &#36;</p>
-            <div class="con-butt">
-                <button type="button" title="buy a product">Buy</button>
-            </div>
-            <div class="con-num-pro" style="display:none;">
-                <button type="button" title="buy a product">-</button>
-                <input type="text" value="1" readonly>
-                <button type="button" title="buy a product"><span class="goUp">+</span></button>
-            </div>
-        </div>
-    </div>
-
+    </ul>
 
 </section>
 </div>
@@ -254,14 +108,21 @@ padding:.5rem;
 border:1px solid black;
 width:fit-content;
 max-width:calc(200px + (2 * 0.5rem));
+list-style:none;
+margin:0;
 }
 
-.con-product p
+.con-product li
 {
 text-align:center;
 }
 
-.con-product img
+.con-product li:first-child
+{
+margin-bottom:.5rem;
+}
+
+.con-product li img
 {
 width:100%;
 max-width:200px;
@@ -278,7 +139,7 @@ gap:1rem;
 margin:.5rem 0;
 }
 
-.con-buy p
+.con-buy li
 {
 font-size:2rem;
 font-weight:bold;
@@ -323,13 +184,9 @@ grid-template-columns:2rem 2rem 2rem;
 justify-content:end;
 }
 
-.con-num-pro input,.con-num-pro input:focus
+.con-num-pro p
 {
-padding:.5rem;
-border:none;
-outline:none;
 font-size:1.5rem;
-height:2rem;
 text-align:center;
 font-weight:bold;
 cursor:default;
