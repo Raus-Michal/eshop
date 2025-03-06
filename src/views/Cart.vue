@@ -36,7 +36,7 @@
 </section>
 </template>
 
-<style>
+<style scope>
 .con
 {
 display:flex;
