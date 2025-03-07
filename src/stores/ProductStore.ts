@@ -60,7 +60,14 @@ export const useProductStore = defineStore('productStore', {
     // Vrátí počet produktů v košíku podle jejich id
     const item = this.cart.find(item => item.id === productId); // cart.value je pole všech produktů v košíku (protože používám storeToRefs()), .find() projde celé pole a najde první objekt, kde item.id === productId., Pokud takový produkt existuje, vrátí jeho objekt. Pokud neexistuje, vrátí undefined.
     return item ? item.quantity : 0;  // pokud je item (není undefined), vracej item, jinak vracej 0
+  },
+  totalPrice(){
+  return this.cart.reduce((total, item) => total + item.price * item.quantity, 0); // .reduce() projde celé pole cart, sečte ceny produktů a vynásobí je jejich počtem (quantity), 0 je počáteční hodnota (total).
+  },
+  clearItemFromCart(productId:number){
+    // funkce vymaže produkt v košíku bez ohledu na to, kolikrát se v košíku nachází, quantity nerozhoduje
+    this.cart = this.cart.filter(item => item.id !== productId); // filter ponechá všechny objekty, které neodpovídají podmínce cart.id !== productId
+    console.log(`Produkt s ID ${productId} byl odstraněn z košíku.`, this.cart);
   }
-  
   }
 });

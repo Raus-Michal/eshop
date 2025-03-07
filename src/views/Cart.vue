@@ -1,34 +1,29 @@
 <script setup lang="ts">
 import Thing from '../components/Thing.vue'
+import { storeToRefs } from 'pinia';
+import { useProductStore } from '@/stores/ProductStore';
 
+const productStore = useProductStore(); // Použití store
 
+const { cart } = storeToRefs(productStore); // Zajistí reaktivní přístup k `cart`
 
 </script>
 
 <template>
 <section class="con">
-    <div class="con-products">
+    <div v-if="cart.length > 0" class="con-products">
         <div>
-
-
-<Thing />
-<Thing />
-<Thing />
-<Thing />
-<Thing />
-<Thing />
-<Thing />
-<Thing />
-
-
-            
+        <Thing :cart="cart" />
         </div>
 
         <div class="con-price">
         <p>Total</p>
-        <p class="big">10 &#36;</p>
+        <p class="big">{{ productStore.totalPrice() }} &euro;</p>
         </div>
     </div>
+<div v-if="cart.length === 0">
+<p>V košíku není žádné zboží.</p>
+</div>
 </section>
 </template>
 

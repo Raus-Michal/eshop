@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import Product from '../components/Product.vue';
-import { useProductStore } from '@/stores/ProductStore'; // Ověř správnou cestu
+import { storeToRefs } from 'pinia';
+import { useProductStore } from '@/stores/ProductStore';
 import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter(); // načtení obsahu routeru do proměnné
+
+const goToCart=()=>
+{
+// funkce zajistí pomocí routeru přesměrování na košík
+router.push('/cart'); // Přesměrování na košík
+};
 
 
 const productStore = useProductStore(); // Použití store
@@ -23,7 +32,7 @@ console.log("Produkty načteny v Store: " + products);
 <div class="cen">
 <section class="con-all-products">
 
-<button v-if="cart.length > 0" class="number-of-products" type="button" title="Shopping cart">
+<button @click="goToCart()" v-if="cart.length > 0" class="number-of-products" type="button" title="Shopping cart">
 <span class="p-number">{{ cart.length }}</span>
 <span class="butt-svg"> </span>
 </button>
