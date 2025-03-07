@@ -1,4 +1,8 @@
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
+import { nextTick } from 'vue';
+
+let loading=ref<boolean>(false);
 
 interface CartItem {
   id: number;
@@ -11,7 +15,8 @@ interface CartItem {
 export const useProductStore = defineStore('productStore', {
   state: () => ({
     products: [] as { id: number; name: string; price: number; picture: string }[],
-    cart: [] as CartItem[] // Oprava: Explicitně říkáme TypeScriptu, že cart je pole objektů typu CartItem
+    cart: [] as CartItem[], // Oprava: Explicitně říkáme TypeScriptu, že cart je pole objektů typu CartItem
+    loading:false // proměnná určuje, zda došlo k načtení produktů
   }),
   actions: {
     async loadProducts() {
@@ -21,6 +26,10 @@ export const useProductStore = defineStore('productStore', {
 
         this.products = await response.json();
         console.log('Produkty načteny:', this.products);
+        nextTick(() => {
+          // Tento kód bude vykonán až po tom, co Vue dokončí změny v DOMu
+        this.loading=true; // proměnná určuje, zda došlo k načtení produktů
+        });
       } catch (error) {
         console.error('Chyba při načítání produktů:', error);
       }
