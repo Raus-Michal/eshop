@@ -8,7 +8,7 @@ import { onMounted } from 'vue';
 const productStore = useProductStore(); // Použití store
 
 const { products } = storeToRefs(productStore); // destrukce objektu productStore
-
+const { cart } = storeToRefs(productStore); // Zajistí reaktivní přístup k `cart`
 
 onMounted(()=>
 {
@@ -23,8 +23,8 @@ console.log("Produkty načteny v Store: " + products);
 <div class="cen">
 <section class="con-all-products">
 
-<button class="number-of-products" type="button" title="Shopping cart">
-<span class="p-number">1</span>
+<button v-if="cart.length > 0" class="number-of-products" type="button" title="Shopping cart">
+<span class="p-number">{{ cart.length }}</span>
 <span class="butt-svg"> </span>
 </button>
 

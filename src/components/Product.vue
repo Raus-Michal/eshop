@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { useProductStore } from '@/stores/ProductStore';
+import { storeToRefs } from 'pinia';
+
+const productStore = useProductStore();
+const { cart } = storeToRefs(productStore); // Zajistí reaktivní přístup k `cart`
 
 const props = defineProps<{
 products:{
@@ -6,8 +11,18 @@ id:number,
 name:string,
 price: number,
 picture: string
-}[]
+}[] // z objektu udělá pole
 }>();
+
+const addToCart = (product: { id: number; name: string; price: number; picture: string }) =>
+{
+productStore.addToCart(product); // pošle do funkce zodpovědné za vkládání do košíků požadavek na vložení produktu, funkce v ProductStore.ts
+};
+
+const removeToCart = (productId:number) =>
+{
+productStore.removeFromCart(productId); // pošle do funkce zodpovědné za odstranění zboží z košíků, funkce v ProductStore.ts
+};
 
 </script>
 
@@ -18,13 +33,13 @@ picture: string
         <li><img :src="product.picture" width="200" height="200" alt="img-produkct"></li>
         <div class="con-buy">
             <li>{{ product.price }} &euro;</li>
-            <li class="con-butt">
-                <button type="button" title="buy a product">Buy</button>
+            <li class="con-butt"  v-if="productStore.getQuantity(product.id) === 0">
+                <button @click="addToCart(product)" type="button" title="buy a product">Buy</button>
             </li>
-            <li class="con-num-pro" style="display:none;"> <!-- (ZDE BUDE místo toho V-IF) -->
-                <button type="button" title="buy a product"><span class="goUp">-</span></button>
-                <p>1</p>
-                <button type="button" title="buy a product"><span class="goUp">+</span></button>
+            <li class="con-num-pro" v-if="productStore.getQuantity(product.id) > 0">
+                <button @click="removeToCart(product.id)" type="button" title="buy a product"><span class="goUp">-</span></button>
+                <p>{{ productStore.getQuantity(product.id) /* objekt productStore je v ProductStore.ts */ }}</p>
+                <button @click="addToCart(product)" type="button" title="buy a product"><span class="goUp">+</span></button>
             </li>
         </div>
     </ul>
@@ -67,7 +82,8 @@ aspect-ratio:1/1;
 {
 display:grid;
 grid-template-columns:auto 1fr;
-gap:1rem;
+align-items:center;
+gap:.5rem;
 margin:.5rem 0;
 }
 
@@ -76,13 +92,6 @@ margin:.5rem 0;
 font-size:2rem;
 font-weight:bold;
 margin:0;
-}
-
-.con-butt,.con-num-pro /* deklarace zabrání poskakováná layoutu karty produktu, při kliku na button BUY */
-{
-height:2rem;
-max-height:2rem;
-overflow:visible; /* pro jistotu, kdyby obsah přetekl přes kontejner */
 }
 
 .con-butt button,.con-num-pro button
@@ -112,7 +121,7 @@ padding:0;
 .con-num-pro
 {
 display:grid;
-grid-template-columns:2rem 2rem 2rem;
+grid-template-columns:2rem 2.5rem 2rem;
 justify-content:end;
 }
 
@@ -122,6 +131,7 @@ font-size:1.5rem;
 text-align:center;
 font-weight:bold;
 cursor:default;
+margin:0;
 }
 
 .goUp /* posun textu pro centraci v buttonu */
