@@ -1,7 +1,20 @@
 <script setup lang="ts">
-
+import { storeToRefs } from 'pinia';
 import Product from '../components/Product.vue';
+import { useProductStore } from '@/stores/ProductStore'; // Ověř správnou cestu
+import { onMounted } from 'vue';
 
+
+const productStore = useProductStore(); // Použití store
+
+const { products } = storeToRefs(productStore); // destrukce objektu productStore
+
+
+onMounted(()=>
+{
+productStore.loadProducts(); // Správné volání akce až po načtení
+console.log("Produkty načteny v Store: " + products);
+});
 
 </script>
 
@@ -16,14 +29,7 @@ import Product from '../components/Product.vue';
 </button>
 
 
- <Product />
-<Product />
- <Product />
-  <Product />
-   <Product />
-    <Product />
-     <Product />
-      <Product />
+ <Product :products="products"  />
 
 </section>
 </div>

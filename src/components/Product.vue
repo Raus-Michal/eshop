@@ -1,15 +1,23 @@
 <script setup lang="ts">
-import imgPath from "@/assets/img.jpg";
+
+const props = defineProps<{
+products:{
+id:number,
+name:string,
+price: number,
+picture: string
+}[]
+}>();
 
 </script>
 
-
 <template>
+<div v-for="product in products" :key="product.id">
 <ul class="con-product">
-        <li>Name product</li>
-        <li><img :src="imgPath" width="200" height="200" alt="img-produkct"></li>
+        <li>{{ product.name }}</li>
+        <li><img :src="product.picture" width="200" height="200" alt="img-produkct"></li>
         <div class="con-buy">
-            <li>10 &#36;</li>
+            <li>{{ product.price }} &euro;</li>
             <li class="con-butt">
                 <button type="button" title="buy a product">Buy</button>
             </li>
@@ -20,6 +28,7 @@ import imgPath from "@/assets/img.jpg";
             </li>
         </div>
     </ul>
+    </div>
 </template>
 
 
