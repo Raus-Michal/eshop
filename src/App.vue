@@ -1,6 +1,15 @@
 <script setup lang="ts">
-import { RouterLink, RouterView , useRoute } from 'vue-router'
-// import HelloWorld from './components/HelloWorld.vue'
+import { RouterLink, useRoute } from 'vue-router';
+import { useProductStore } from '@/stores/ProductStore'; // Ověř správnou cestu
+import { onMounted } from 'vue';
+
+
+const productStore = useProductStore(); // Použití store
+
+onMounted(()=>
+{
+productStore.loadProducts(); // Správné volání akce až po načtení
+});
 
 const route = useRoute();
 </script>

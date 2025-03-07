@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import Thing from '../components/Thing.vue'
+
+
+
 </script>
 
 <template>
