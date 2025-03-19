@@ -1,44 +1,35 @@
 <script setup lang="ts">
 import { useProductStore } from '@/stores/ProductStore';
-const productStore = useProductStore(); // Použití store
 
-const props = defineProps<{
-cart:{
-id: number;
-name: string;
-price: number;
-picture: string;
-quantity: number;
-}[] // z objektu udělá pole
-}>();
+const productStore = useProductStore(); // Přímý přístup ke store
 
-
+// Funkce pro odstranění položky z košíku
 const clearItemFromCart = (productId: number) => {
-// pomocí proměnné se přemostí funkce objektu
-productStore.clearItemFromCart(productId); // funkce odstraní z košíku produkt viz ProductStore.ts
+  productStore.clearItemFromCart(productId); // Volání akce přímo ze store
 };
-
 </script>
 
 <template>
-<div  v-for="cart in cart" :key="cart.id">
-<ul class="product">
-            <li>
-                <button @click="clearItemFromCart(cart.id)" type="button" title="Odebrat položku z košíku">
-                  <span class="svg-span">
-                  <svg width="400" height="400" viewBox="0 0 400 400" stroke-width="50" stroke-linejoin="round" stroke="black" stroke-linecap="round" fill="none">
-                  <line x1="50" y1="50" x2="350" y2="350" />
-                  <line x1="350" y1="50" x2="50" y2="350" />
-                  </svg>
-                  </span>
-                </button>
-            </li>
-                <li>{{ cart.name }}</li>
-                <li>{{ cart.quantity}}x</li>
-                <li>{{ cart.price * cart.quantity }} &euro;</li>
-</ul>
-</div>
+  <!-- Iterace přes produkty v košíku přímo ze store -->
+  <div v-for="cart in productStore.cart" :key="cart.id">
+    <ul class="product">
+      <li>
+        <button @click="clearItemFromCart(cart.id)" type="button" title="Odebrat položku z košíku">
+          <span class="svg-span">
+            <svg width="400" height="400" viewBox="0 0 400 400" stroke-width="50" stroke-linejoin="round" stroke="black" stroke-linecap="round" fill="none">
+              <line x1="50" y1="50" x2="350" y2="350" />
+              <line x1="350" y1="50" x2="50" y2="350" />
+            </svg>
+          </span>
+        </button>
+      </li>
+      <li>{{ cart.name }}</li>
+      <li>{{ cart.quantity }}x</li>
+      <li>{{ cart.price * cart.quantity }} &euro;</li>
+    </ul>
+  </div>
 </template>
+
 
 <style scope>
 

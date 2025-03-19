@@ -13,7 +13,7 @@ const { cart } = storeToRefs(productStore); // Zajistí reaktivní přístup k `
 <section class="con">
     <div v-if="cart.length > 0" class="con-products">
         <div>
-        <Thing :cart="cart" />
+        <Thing />
         </div>
 
         <div class="con-price">

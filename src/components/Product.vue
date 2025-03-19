@@ -1,51 +1,45 @@
 <script setup lang="ts">
 import { useProductStore } from '@/stores/ProductStore';
-import { storeToRefs } from 'pinia';
 
-const productStore = useProductStore();
-const { cart } = storeToRefs(productStore); // Zajistí reaktivní přístup k `cart`
+const productStore = useProductStore(); // Přímý přístup ke store
 
-const props = defineProps<{
-products:{
-id:number,
-name:string,
-price: number,
-picture: string
-}[] // z objektu udělá pole
-}>();
-
-const addToCart = (product: { id: number; name: string; price: number; picture: string }) =>
-{
-productStore.addToCart(product); // pošle do funkce zodpovědné za vkládání do košíků požadavek na vložení produktu, funkce v ProductStore.ts
+// Funkce pro přidání produktu do košíku
+const addToCart = (product: { id: number; name: string; price: number; picture: string }) => {
+  productStore.addToCart(product); // Volání akce přímo ze store
 };
 
-const removeToCart = (productId:number) =>
-{
-productStore.removeFromCart(productId); // pošle do funkce zodpovědné za odstranění zboží z košíků, funkce v ProductStore.ts
+// Funkce pro odebrání produktu z košíku
+const removeFromCart = (productId: number) => {
+  productStore.removeFromCart(productId); // Volání akce přímo ze store
 };
-
 </script>
 
 <template>
-<div v-for="product in products" :key="product.id">
-<ul class="con-product">
-        <li>{{ product.name }}</li>
-        <li><img :src="product.picture" width="200" height="200" alt="img-produkct"></li>
-        <div class="con-buy">
-            <li>{{ product.price }} &euro;</li>
-            <li class="con-butt"  v-if="productStore.getQuantity(product.id) === 0">
-                <button @click="addToCart(product)" type="button" title="buy a product">Buy</button>
-            </li>
-            <li class="con-num-pro" v-if="productStore.getQuantity(product.id) > 0">
-                <button @click="removeToCart(product.id)" type="button" title="buy a product"><span class="goUp">-</span></button>
-                <p>{{ productStore.getQuantity(product.id) /* objekt productStore je v ProductStore.ts */ }}</p>
-                <button @click="addToCart(product)" type="button" title="buy a product"><span class="goUp">+</span></button>
-            </li>
-        </div>
+  <!-- Iterace přes produkty přímo z productStore.products -->
+  <div v-for="product in productStore.products" :key="product.id">
+    <ul class="con-product">
+      <li>{{ product.name }}</li>
+      <li>
+        <img :src="product.picture" width="200" height="200" alt="img-product" />
+      </li>
+      <div class="con-buy">
+        <li>{{ product.price }} &euro;</li>
+        <li class="con-butt" v-if="productStore.getQuantity(product.id) === 0">
+          <button @click="addToCart(product)" type="button" title="Buy a product">Buy</button>
+        </li>
+        <li class="con-num-pro" v-if="productStore.getQuantity(product.id) > 0">
+          <button @click="removeFromCart(product.id)" type="button" title="Remove from cart">
+            <span class="goUp">-</span>
+          </button>
+          <p>{{ productStore.getQuantity(product.id) }}</p>
+          <button @click="addToCart(product)" type="button" title="Add to cart">
+            <span class="goUp">+</span>
+          </button>
+        </li>
+      </div>
     </ul>
-    </div>
+  </div>
 </template>
-
 
 <style scope>
 
