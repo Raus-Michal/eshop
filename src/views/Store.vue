@@ -30,7 +30,7 @@ console.log("Produkty načteny v Store: " + products);
 <template>
 
 <div class="cen">
-    <section v-if="productStore.loading==true" class="con-all-products">
+    <section v-if="productStore.loading==false" class="con-all-products">
         <button @click="goToCart()" v-if="cart.length > 0" class="number-of-products" type="button" title="Shopping cart">
             <span class="p-number">{{ cart.length }}</span>
             <span class="butt-svg">

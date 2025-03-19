@@ -1,82 +1,91 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
 import { nextTick } from 'vue';
 
-let loading=ref<boolean>(false);
-
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  picture: string;
-  quantity: number;
+// Definujeme `Product` interface pro produkty.
+interface Product {
+  id: number; // Jedinečný identifikátor produktu.
+  name: string; // Název produktu.
+  price: number; // Cena produktu.
+  picture: string; // URL obrázku produktu.
 }
 
+// Definujeme `CartItem` interface pro položku v košíku, která navíc obsahuje `quantity`.
+interface CartItem extends Product {
+  quantity: number; // Počet kusů produktu v košíku.
+}
+
+// Definujeme store pod názvem `productStore`.
 export const useProductStore = defineStore('productStore', {
+  // `state` obsahuje počáteční stav (data) pro tento store.
   state: () => ({
-    products: [] as { id: number; name: string; price: number; picture: string }[],
-    cart: [] as CartItem[], // Oprava: Explicitně říkáme TypeScriptu, že cart je pole objektů typu CartItem
-    loading:false // proměnná určuje, zda došlo k načtení produktů
+    products: [] as Product[], // Pole produktů, definované jako pole objektů typu `Product`.
+    cart: [] as CartItem[], // Pole položek v košíku, definované jako pole objektů typu `CartItem`.
+    loading: true, // Indikátor, zda probíhá načítání produktů.
   }),
+
+  // `actions` obsahují funkce, které mohou modifikovat stav nebo provádět asynchronní operace.
   actions: {
+    // Asynchronní funkce pro načtení produktů ze serveru.
     async loadProducts() {
       try {
-        const response = await fetch('/data/shop-items.json');
-        if (!response.ok) throw new Error('Chyba při načítání produktů');
+        const response = await fetch('/data/shop-items.json'); // Načítá data z JSON souboru na zadané URL.
+        if (!response.ok) throw new Error('Chyba při načítání produktů'); // Kontrola, zda požadavek proběhl úspěšně.
 
-        this.products = await response.json();
+        this.products = await response.json(); // Při úspěšném načtení uloží produkty do stavu `products`.
         console.log('Produkty načteny:', this.products);
+
         nextTick(() => {
-          // Tento kód bude vykonán až po tom, co Vue dokončí změny v DOMu
-        this.loading=true; // proměnná určuje, zda došlo k načtení produktů
+          // Zajistí, že změny ve stavu `loading` budou provedeny až po aktualizaci DOMu.
+          this.loading = false;
         });
       } catch (error) {
-        console.error('Chyba při načítání produktů:', error);
+        console.error('Chyba při načítání produktů:', error); // Zpracování chyby načítání, vypíše do konzole.
       }
-
-      
     },
 
-    addToCart(product: { id: number; name: string; price: number; picture: string }) {
-      const itemInCart = this.cart.find(item => item.id === product.id); // hledá v objektu, jestli nějáký objekt odpovídá product.id, pokud žádný z objektů neodpovídá, vrátí undefined
-      if(itemInCart)
-      {
-        if (itemInCart.quantity < 99)
-        { // podmínka zabrání přidání více než 99 kusů
-        itemInCart.quantity++; // Zvýší množství, pokud už je produkt v košíku
+    // Přidá produkt do košíku, nebo zvýší jeho množství, pokud už je v košíku.
+    addToCart(product: Product) {
+      const itemInCart = this.cart.find(item => item.id === product.id); // Vyhledá produkt podle ID v košíku.
+
+      if (itemInCart) {
+        if (itemInCart.quantity < 99) { // Podmínka brání přidání více než 99 kusů jednoho produktu.
+          itemInCart.quantity++; // Zvýší množství o 1.
         }
       } else {
-        this.cart.push({ ...product, quantity: 1 }); // pokud není produkt v košíku, pushne ho jako objekt do pole cart s quantity=1
+        this.cart.push({ ...product, quantity: 1 }); // Přidá nový produkt s množstvím 1, pokud ještě není v košíku.
       }
-      console.log('Košík:', this.cart);
-    },
-    removeFromCart(productId: number) {
-      const itemIndex = this.cart.findIndex(item => item.id === productId); // findIndex() - vrátí číslo (index) objektu v poli (0,1,2 ...) pokud odpovídá podmínce item.id === productId, jinak vrátí -1
-      
-      if (itemIndex !== -1) {
-        // pokud byl objekt produktu v poli cart nalezen
-        if (this.cart[itemIndex].quantity > 1) {
-          this.cart[itemIndex].quantity--; // Sníží počet o 1
-        } else {
-          this.cart.splice(itemIndex, 1); // Pokud je poslední kus, odstraní produkt z košíku
-        }
-      }
-      console.log('Košík po odebrání:', this.cart);
+      console.log('Košík:', this.cart); // Vypíše aktuální stav košíku.
     },
 
-    getQuantity(productId: number)
-    {
-    // Vrátí počet produktů v košíku podle jejich id
-    const item = this.cart.find(item => item.id === productId); // cart.value je pole všech produktů v košíku (protože používám storeToRefs()), .find() projde celé pole a najde první objekt, kde item.id === productId., Pokud takový produkt existuje, vrátí jeho objekt. Pokud neexistuje, vrátí undefined.
-    return item ? item.quantity : 0;  // pokud je item (není undefined), vracej item, jinak vracej 0
-  },
-  totalPrice(){
-  return this.cart.reduce((total, item) => total + item.price * item.quantity, 0); // .reduce() projde celé pole cart, sečte ceny produktů a vynásobí je jejich počtem (quantity), 0 je počáteční hodnota (total).
-  },
-  clearItemFromCart(productId:number){
-    // funkce vymaže produkt v košíku bez ohledu na to, kolikrát se v košíku nachází, quantity nerozhoduje
-    this.cart = this.cart.filter(item => item.id !== productId); // filter ponechá všechny objekty, které neodpovídají podmínce cart.id !== productId
-    console.log(`Produkt s ID ${productId} byl odstraněn z košíku.`, this.cart);
-  }
+    // Sníží množství produktu v košíku o 1, nebo jej zcela odstraní, pokud je poslední kus.
+    removeFromCart(productId: number) {
+      const itemIndex = this.cart.findIndex(item => item.id === productId); // Najde index produktu podle jeho ID.
+
+      if (itemIndex !== -1) { // Pokud je produkt nalezen v košíku...
+        if (this.cart[itemIndex].quantity > 1) {
+          this.cart[itemIndex].quantity--; // Sníží množství produktu o 1.
+        } else {
+          this.cart.splice(itemIndex, 1); // Odstraní produkt z košíku, pokud je množství pouze 1.
+        }
+      }
+      console.log('Košík po odebrání:', this.cart); // Vypíše aktuální stav košíku po úpravě.
+    },
+
+    // Vrátí množství produktu v košíku podle jeho ID.
+    getQuantity(productId: number) {
+      const item = this.cart.find(item => item.id === productId); // Hledá produkt podle ID v košíku.
+      return item ? item.quantity : 0; // Vrátí množství produktu, pokud je nalezen, jinak 0.
+    },
+
+    // Vypočítá celkovou cenu všech položek v košíku.
+    totalPrice() {
+      return this.cart.reduce((total, item) => total + item.price * item.quantity, 0); // Spočítá celkovou cenu košíku.
+    },
+
+    // Odstraní všechny instance produktu z košíku podle jeho ID.
+    clearItemFromCart(productId: number) {
+      this.cart = this.cart.filter(item => item.id !== productId); // Odstraní všechny produkty s daným ID z košíku.
+      console.log(`Produkt s ID ${productId} byl odstraněn z košíku.`, this.cart); // Vypíše stav po odstranění.
+    }
   }
 });
