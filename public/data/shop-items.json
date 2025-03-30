@@ -3,120 +3,120 @@
         "id": 1,
         "name": "sint elit",
         "price": 12,
-        "picture": "https://picsum.photos/id/1/200"
+        "picture": "data/images/1-200x200.jpg"
     },
     {
         "id": 2,
         "name": "ex qui",
         "price": 41,
-        "picture": "https://picsum.photos/id/2/200"
+        "picture": "data/images/2-200x200.jpg"
     },
     {
         "id": 3,
         "name": "mollit proident",
         "price": 159,
-        "picture": "https://picsum.photos/id/3/200"
+        "picture": "data/images/3-200x200.jpg"
     },
     {
         "id": 4,
         "name": "labore excepteur",
         "price": 11,
-        "picture": "https://picsum.photos/id/4/200"
+        "picture": "data/images/4-200x200.jpg"
     },
     {
         "id": 5,
         "name": "ex sunt",
         "price": 132,
-        "picture": "https://picsum.photos/id/5/200"
+        "picture": "data/images/5-200x200.jpg"
     },
     {
         "id": 6,
         "name": "fugiat fugiat",
         "price": 20,
-        "picture": "https://picsum.photos/id/6/200"
+        "picture": "data/images/6-200x200.jpg"
     },
     {
         "id": 7,
         "name": "quis ipsum",
         "price": 191,
-        "picture": "https://picsum.photos/id/7/200"
+        "picture": "data/images/7-200x200.jpg"
     },
     {
         "id": 8,
         "name": "tempor id",
         "price": 20,
-        "picture": "https://picsum.photos/id/8/200"
+        "picture": "data/images/8-200x200.jpg"
     },
     {
         "id": 9,
         "name": "Lorem fugiat",
         "price": 107,
-        "picture": "https://picsum.photos/id/9/200"
+        "picture": "data/images/9-200x200.jpg"
     },
     {
         "id": 10,
         "name": "nostrud proident",
         "price": 129,
-        "picture": "https://picsum.photos/id/10/200"
+        "picture": "data/images/10-200x200.jpg"
     },
     {
         "id": 11,
         "name": "laborum culpa",
         "price": 200,
-        "picture": "https://picsum.photos/id/11/200"
+        "picture": "data/images/11-200x200.jpg"
     },
     {
         "id": 12,
         "name": "culpa cupidatat",
         "price": 139,
-        "picture": "https://picsum.photos/id/12/200"
+        "picture": "data/images/12-200x200.jpg"
     },
     {
         "id": 13,
         "name": "adipisicing eiusmod",
         "price": 147,
-        "picture": "https://picsum.photos/id/13/200"
+        "picture": "data/images/13-200x200.jpg"
     },
     {
         "id": 14,
         "name": "officia aliquip",
         "price": 41,
-        "picture": "https://picsum.photos/id/14/200"
+        "picture": "data/images/14-200x200.jpg"
     },
     {
         "id": 15,
         "name": "et aute",
         "price": 35,
-        "picture": "https://picsum.photos/id/15/200"
+        "picture": "data/images/15-200x200.jpg"
     },
     {
         "id": 16,
         "name": "esse reprehenderit",
         "price": 73,
-        "picture": "https://picsum.photos/id/16/200"
+        "picture": "data/images/16-200x200.jpg"
     },
     {
         "id": 17,
         "name": "deserunt ipsum",
         "price": 137,
-        "picture": "https://picsum.photos/id/17/200"
+        "picture": "data/images/17-200x200.jpg"
     },
     {
         "id": 18,
         "name": "velit laboris",
         "price": 94,
-        "picture": "https://picsum.photos/id/18/200"
+        "picture": "data/images/18-200x200.jpg"
     },
     {
         "id": 19,
         "name": "et cillum",
         "price": 186,
-        "picture": "https://picsum.photos/id/19/200"
+        "picture": "data/images/19-200x200.jpg"
     },
     {
         "id": 20,
         "name": "reprehenderit dolore",
         "price": 52,
-        "picture": "https://picsum.photos/id/20/200"
+        "picture": "data/images/20-200x200.jpg"
     }
 ]

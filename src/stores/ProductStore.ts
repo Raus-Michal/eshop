@@ -28,7 +28,7 @@ export const useProductStore = defineStore('productStore', {
     // Asynchronní funkce pro načtení produktů ze serveru.
     async loadProducts() {
       try {
-        const response = await fetch('/data/shop-items.json'); // Načítá data z JSON souboru na zadané URL.
+        const response = await fetch('data/shop-items.json'); // Načítá data z JSON souboru na zadané URL.
         if (!response.ok) throw new Error('Chyba při načítání produktů'); // Kontrola, zda požadavek proběhl úspěšně.
 
         this.products = await response.json(); // Při úspěšném načtení uloží produkty do stavu `products`.
